@@ -43,19 +43,29 @@
 
 2. **Environment Setup**
    ```bash
+   # Backend
    cd server
+   cp .env.example .env
+   # Edit .env with your values
+   
+   # Frontend
+   cd ../client
    cp .env.example .env
    # Edit .env with your values
    ```
 
-   **For MongoDB Atlas (Cloud):**
+   **Server .env:**
    ```env
+   # MongoDB Atlas (Cloud) - Recommended
    MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/foodieconnect
+   
+   # OR Local MongoDB
+   # MONGODB_URI=mongodb://localhost:27017/foodieconnect
    ```
 
-   **For Local MongoDB:**
+   **Client .env:**
    ```env
-   MONGODB_URI=mongodb://localhost:27017/foodieconnect
+   REACT_APP_API_URL=http://localhost:5000/api
    ```
 
 3. **Run**
@@ -75,7 +85,7 @@
 
 ## 🔐 Environment Variables
 
-Create `server/.env`:
+### Server (`server/.env`):
 ```env
 PORT=5000
 # MongoDB Atlas (Cloud) - Recommended for production
@@ -89,7 +99,12 @@ NODE_ENV=development
 CLIENT_URL=http://localhost:3000
 ```
 
-**Security:** Never commit `.env` to git. Use `.env.example` for sharing config.
+### Client (`client/.env`):
+```env
+REACT_APP_API_URL=http://localhost:5000/api
+```
+
+**Security:** Never commit `.env` files to git. Use `.env.example` for sharing config.
 
 **MongoDB Options:**
 - **Atlas (Cloud):** More reliable, no local setup required
