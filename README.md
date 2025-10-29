@@ -48,6 +48,16 @@
    # Edit .env with your values
    ```
 
+   **For MongoDB Atlas (Cloud):**
+   ```env
+   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/foodieconnect
+   ```
+
+   **For Local MongoDB:**
+   ```env
+   MONGODB_URI=mongodb://localhost:27017/foodieconnect
+   ```
+
 3. **Run**
    ```bash
    # Terminal 1 - Backend
@@ -68,13 +78,22 @@
 Create `server/.env`:
 ```env
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/foodieconnect
+# MongoDB Atlas (Cloud) - Recommended for production
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/foodieconnect
+
+# OR Local MongoDB (Development)
+# MONGODB_URI=mongodb://localhost:27017/foodieconnect
+
 JWT_SECRET=your_super_secret_key
 NODE_ENV=development
 CLIENT_URL=http://localhost:3000
 ```
 
 **Security:** Never commit `.env` to git. Use `.env.example` for sharing config.
+
+**MongoDB Options:**
+- **Atlas (Cloud):** More reliable, no local setup required
+- **Local:** Requires MongoDB installation on your machine
 
 ---
 
