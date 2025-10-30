@@ -19,11 +19,13 @@ class JQueryAPI {
         xhr.setRequestHeader('Content-Type', 'application/json');
       },
       error: function(xhr, status, error) {
-        // Avoid hard redirects on 401 to prevent login loops; allow route guards to handle it
+        // Handle 401 Unauthorized errors (expired/invalid tokens)
         if (xhr.status === 401) {
-          // Optionally clear invalid token but do not redirect here
-          // localStorage.removeItem('token');
-          // localStorage.removeItem('user');
+          // Clear invalid token and user data from localStorage
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+          // Notify user that session has expired
+          alert('Session expired. Please login again.');
         }
         console.error('AJAX Error:', error);
       }
@@ -123,9 +125,7 @@ class JQueryAPI {
     deleteComment: (id, commentId) => this.delete(`/recipes/${id}/comments/${commentId}`),
     getUserRecipes: (userId) => this.get(`/recipes/user/${userId}`),
     getGroupRecipes: (groupId) => this.get(`/recipes/group/${groupId}`),
-    getPopularRecipes: () => this.get('/recipes/popular'),
-    addToFavorites: (id) => this.post(`/users/favorites/${id}`),
-    removeFromFavorites: (id) => this.delete(`/users/favorites/${id}`)
+    getPopularRecipes: () => this.get('/recipes/popular')
   };
 
   // Group API
